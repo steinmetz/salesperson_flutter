@@ -2,5 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:salesman/map_screen.dart';
 
 void main() {
-  runApp(MapScreen());
-} 
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+       home: MapScreen(),
+    );
+  }
+}
