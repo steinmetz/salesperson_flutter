@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:salesman/cubit/salesman_cubit.dart';
+import 'package:salesman_app/cubit/salesman_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MapScreen extends StatelessWidget {

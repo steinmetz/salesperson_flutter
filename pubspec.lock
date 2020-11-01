@@ -151,6 +151,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.3.2+2"
+  salesman:
+    dependency: "direct main"
+    description:
+      path: "packages/salesman"
+      relative: true
+    source: path
+    version: "0.0.0"
   sky_engine:
     dependency: transitive
     description: flutter

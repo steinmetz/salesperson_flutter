@@ -3,10 +3,12 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:meta/meta.dart';
+import 'package:salesman/salesman.dart';
 
 part 'salesman_state.dart';
 
 class SalesmanCubit extends Cubit<SalesmanState> {
+  final salesman = SalesMan();
   final route = [
     [51.67071748655678, 8.37641067802906],
     [51.67261606983089, 8.372891619801521],
@@ -30,19 +32,34 @@ class SalesmanCubit extends Cubit<SalesmanState> {
 
   void addPoint(LatLng position) {
     final s = state as SalesmanLoaded;
-    final newMarker = Marker(
-      markerId: MarkerId(
-        DateTime.now().millisecondsSinceEpoch.toString(),
-      ),
-      position: position,
-    );
 
-    final markers = {
-      ...s.markers,
-      newMarker,
-    };
+    var points = s.markers
+        .map((e) => [
+              e.position.latitude,
+              e.position.longitude,
+            ])
+        .toList();
+    points.add([position.latitude, position.longitude]);
 
-    final polylinePoints = markers.map((e) => (e.position)).toList();
+    if (points.length > 2) {
+      points = salesman.calculateBestPath(
+        startPoint: points[0],
+        points: points,
+      );
+    }
+    var markers = Set<Marker>();
+    var polylinePoints = List<LatLng>();
+    points.forEach((point) {
+      final latLng = LatLng(point[0], point[1]);
+      polylinePoints.add(latLng);
+      markers.add(
+        Marker(
+          markerId: MarkerId('${latLng.latitude},${latLng.longitude}'),
+          position: latLng,
+        ),
+      );
+    });
+
     final polyline = Polyline(
       polylineId: PolylineId(
         DateTime.now().millisecondsSinceEpoch.toString(),
