@@ -16,8 +16,8 @@ dependencies:
   equatable: ^1.2.5
   flutter_bloc: ^6.0.6
   google_maps_flutter: ^1.0.5
-  salesman:
-    path: ./packages/salesman
+  salesperson:
+    path: ./packages/salesperson
 
 dev_dependencies:
   flutter_test:
